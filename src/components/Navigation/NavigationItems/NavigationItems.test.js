@@ -5,6 +5,7 @@ import Adapter from "enzyme-adapter-react-16";
 
 import NavigationItems from "./NavigationItems";
 import NavigationItem from "./NavigationItem/NavigationItem";
+import { wrap } from "module";
 
 configure({ adapter: new Adapter() });
 
@@ -22,5 +23,12 @@ describe("<NavigationItems />", () => {
     // wrapper = shallow(<NavigationItems isAuthenticated />);
     wrapper.setProps({ isAuthenticated: true });
     expect(wrapper.find(NavigationItem)).toHaveLength(3);
+  });
+
+  it("should render three <NavigationItems /> elements if authenticated", () => {
+    wrapper.setProps({ isAuthenticated: true });
+    expect(
+      wrapper.contains(<NavigationItem link="/logout">Logout</NavigationItem>)
+    ).toEqual(true);
   });
 });
